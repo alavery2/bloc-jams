@@ -30,6 +30,22 @@ var albumPicasso = {
      ]
  };
 
+ // Alex's Album
+ var albumAlex = {
+     title: 'My Album',
+     artist: 'Alex Avery',
+     label: 'AA',
+     year: '1990',
+     albumArtUrl: 'assets/images/album_covers/10.png',
+     songs: [
+         { title: 'A?', duration: '1:01' },
+         { title: 'L?', duration: '5:01' },
+         { title: 'E?', duration: '3:21'},
+         { title: 'X?', duration: '3:14' },
+         { title: 'ALEX!', duration: '2:15'}
+     ]
+ };
+
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -42,13 +58,13 @@ var createSongRow = function(songNumber, songName, songLength) {
      return template;
  };
 
- var setCurrentAlbum = function(album) {
-     // #1
-     var albumTitle = document.getElementsByClassName('album-view-title')[0];
-     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
+var setCurrentAlbum = function(album) {
  
      // #2
      albumTitle.firstChild.nodeValue = album.title;
@@ -66,5 +82,12 @@ var createSongRow = function(songNumber, songName, songLength) {
  };
  
  window.onload = function() {
-     setCurrentAlbum(albumPicasso);
+     setCurrentAlbum(albumMarconi);
+     var albumArray = [albumMarconi, albumPicasso, albumAlex];
+     var count = 0;
+     albumImage.addEventListener("click", function(event) {
+        count = (count + 1) % albumArray.length;
+        setCurrentAlbum(albumArray[count]);
+        console.log(count);
+     });
  };
