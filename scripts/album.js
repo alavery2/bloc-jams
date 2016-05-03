@@ -93,13 +93,16 @@ var songListContainer = document.getElementsByClassName('album-view-song-list')[
 var songRows = document.getElementsByClassName('album-view-song-item');
 
 var findParentByClassName = function(element, targetClass) {
-    if (element) {
+    if (element.parentElement) {
         var currentParent = element.parentElement;
         while (currentParent.className != targetClass) {
             currentParent = currentParent.parentElement;
         }
         return currentParent;
+    } else {
+        return "No parent found."
     }
+    return "No parent found with that class name."
 };
 
 var getSongItem = function(element) {
